@@ -1,0 +1,1 @@
+class InitContext(val size: Int, val hashCount: Int)
