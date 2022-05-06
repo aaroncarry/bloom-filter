@@ -1,5 +1,7 @@
 package process
 
+import java.math.BigInteger
+
 abstract class AbstractHashProcessor {
     abstract fun getHashCode(string: String): HashCodeContext
 
@@ -21,8 +23,8 @@ abstract class AbstractHashProcessor {
     operator fun plus(element: AbstractHashProcessor): AbstractHashProcessor {
         return object : AbstractHashProcessor() {
             override fun getHashCode(string: String): HashCodeContext {
-                val hash1 = Integer.valueOf(this@AbstractHashProcessor.getHashCode(string).hashCode, 16)
-                val hash2 = Integer.valueOf(element.getHashCode(string).hashCode, 16)
+                val hash1 = BigInteger(this@AbstractHashProcessor.getHashCode(string).hashCode, 16)
+                val hash2 = BigInteger(element.getHashCode(string).hashCode, 16)
                 return HashCodeContext((hash1 + hash2).toString(16))
             }
         }
@@ -31,8 +33,8 @@ abstract class AbstractHashProcessor {
     operator fun times(times: Int): AbstractHashProcessor {
         return object : AbstractHashProcessor() {
             override fun getHashCode(string: String): HashCodeContext {
-                val hash = Integer.valueOf(this@AbstractHashProcessor.getHashCode(string).hashCode, 16)
-                return HashCodeContext((hash.times(times)).toString(16))
+                val hash = BigInteger(this@AbstractHashProcessor.getHashCode(string).hashCode, 16)
+                return HashCodeContext(hash.times(times.toBigInteger()).toString(16))
             }
         }
     }

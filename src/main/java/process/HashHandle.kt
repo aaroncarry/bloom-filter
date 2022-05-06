@@ -25,7 +25,7 @@ class HashHandle(hashMethodSize: Int) {
         }
     }
 
-    private fun generateHashCode(text: String): ArrayList<HashCodeContext> {
+    fun generateHashCode(text: String): ArrayList<HashCodeContext> {
         val result = arrayListOf<HashCodeContext>()
         hashList.forEach {
             result.add(it.getHashCode(text))
